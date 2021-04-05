@@ -4,6 +4,8 @@ Quickbox is an extension to [ChoiceScript](https://github.com/dfabulich/choicesc
 ### Features
 - On-the-fly theme switching (`theme`)
 - Toggleable page-switch animations (`animate`)
+- Zoom in and out; resize global font size (`bigger_text`, `smaller_text`)
+- Hide buttons in runtime. Make your players tremble by hiding their stats when their characters are stripped of power! (`hide_buttons`, `show_buttons`)
 - Extended formatting support. You can now add underlines, strikethrough, and many more to your texts!
 
 ### Installation
@@ -15,4 +17,4 @@ Quickbox is an extension to [ChoiceScript](https://github.com/dfabulich/choicesc
 6. Run your game!
 
 ### Disclaimer
-> I am not affiliated with ChoiceScript or Dan Fabulich himself. Please do NOT report any bugs and issues you encounter whilst using this extension in the official ChoiceScript GitHub page.
+> I am not affiliated with ChoiceScript, Dan Fabulich, or those that have worked with ChoiceScript. Please do **NOT** report any bugs and issues you encounter whilst using this extension in the official ChoiceScript GitHub page.
