@@ -17,10 +17,11 @@ Scene.prototype.animate = function animate(shouldAnimate) {
 /**
  * Changes the theme of the page.
  *
- * @params theme		The theme to set. This argument is passed to
- * 								changeBackgroundColor.
+ * @params theme	The theme to set. This argument is passed to
+ *			changeBackgroundColor. Valid options are
+ *			"sepia", "white" (same as sepia), "black"
  *
- * @see [changeBackgroundColor]
+ * @see [ui#changeBackgroundColor]
  **/
 Scene.prototype.theme = function theme(theme) {
   self.changeBackgroundColor(theme);
@@ -43,18 +44,63 @@ Scene.prototype.bigger_text = function bigger_text() {
 Scene.prototype.smaller_text = function smaller_text() {
   self.changeFontSize(false);
 }
+
+/**
+ * Hides buttons, preventing interaction.
+ *
+ * Warning!
+ * Make sure your user is aware of this,
+ * and that you are not hiding the buttons
+ * in situations wherein the user can't progress
+ * the game.
+ *
+ * @params args		Buttons to show, this can be any of
+ *			"settings", "menu", and "stats", or
+ *			all of them.
+ **/
+Scene.prototype.hide_buttons = function hide_buttons(arg) {
+  var args = arg.split(",").map(item => item.trim());
+  
+  if (args.includes("menu") || args.includes("settings")) {
+    self.document.getElementById("menuButton").style.display = "none";
+  }
+  
+  if (args.includes("stats")) {
+    self.document.getElementById("statsButton").style.display = "none";
+  }
+}
+
+/**
+ * Pops back buttons to visibility.
+ *
+ * @params args		Buttons to show, this can be any of
+ *			"settings", "menu", and "stats", or
+ *			all of them.
+ **/
+Scene.prototype.show_buttons = function show_buttons(arg) {
+  var args = arg.split(",").map(item => item.trim());
  
-Scene.validCommands.theme = 1;
-Scene.validCommands.animate = 1;
-Scene.validCommands.bigger_text = 1;
-Scene.validCommands.smaller_text = 1;
+  if (args.includes("menu") || args.includes("settings")) {
+    self.document.getElementById("menuButton").style.display = "block";
+  }
+  
+  if (args.includes("stats")) {
+    self.document.getElementById("statsButton").style.display = "block";
+  }
+}
+
+// Add our list of commands to the Scene itself.
+var commands = [ "theme", "animate", "bigger_text", "smaller_text", "hide_buttons", "show_buttons" ];
+for (i = 0; i < commands.length; i++) {
+  Scene.validCommands[commands[i]] = 1;
+}
 
 /** OVERRIDES FOR STANDARD CHOICESCRIPT FUNCTIONS **/
 
 /** 
  * Override replaceBbCode to allow for a working [u] and [s] tag.
  *
- * @see ui#replaceBbCode
+ * @see [ui#replaceBbCode]
  **/
 var _bbCode = replaceBbCode;
 replaceBbCode = function(msg) {
