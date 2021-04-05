@@ -9,7 +9,7 @@ Quickbox is an extension to [ChoiceScript](https://github.com/dfabulich/choicesc
 - Extended formatting support. You can now add underlines, strikethrough, and many more to your texts!
 
 ### Installation
-1. Download the latest copy of Quickbox. You can do this either by cloning this git repository, or you may also download it directly by [saving this page](https://raw.githubusercontent.com/wordmage/quickbox-cs/master/quickbox.min.js)
+1. Download the latest copy of Quickbox. You can do this either by cloning this git repository, or you may also download it directly by [saving this page](https://raw.githubusercontent.com/wordmage/quickbox-choicescript/master/quickbox.min.js)
 2. Copy this file to your `web` directory of your ChoiceScript install
 3. In the same `web` directory, navigate to the `mygame` directory
 4. Find and open `index.html`, then scroll down until you can find the line `<script src="mygame.js"></script>`
