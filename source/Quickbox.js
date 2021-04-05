@@ -49,7 +49,7 @@ Scene.prototype.smaller_text = function smaller_text() {
  * Hides buttons, preventing interaction.
  *
  * Warning!
- * Make sure your user is aware of this,
+ * Make sure your players are aware of this,
  * and that you are not hiding the buttons
  * in situations wherein the user can't progress
  * the game.
@@ -59,7 +59,7 @@ Scene.prototype.smaller_text = function smaller_text() {
  *			all of them.
  **/
 Scene.prototype.hide_buttons = function hide_buttons(arg) {
-  var args = arg.split(",").map(item => item.trim());
+  var args = arg.splitToArray(",");
   
   if (args.includes("menu") || args.includes("settings")) {
     self.document.getElementById("menuButton").style.display = "none";
@@ -78,7 +78,7 @@ Scene.prototype.hide_buttons = function hide_buttons(arg) {
  *			all of them.
  **/
 Scene.prototype.show_buttons = function show_buttons(arg) {
-  var args = arg.split(",").map(item => item.trim());
+  var args = arg.splitToArray(",");
  
   if (args.includes("menu") || args.includes("settings")) {
     self.document.getElementById("menuButton").style.display = "block";
@@ -110,4 +110,16 @@ replaceBbCode = function(msg) {
       .replace(/\[\/u\]/g, '</u>')
       .replace(/\[s\]/g, '<s>')
       .replace(/\[\/s\]/g, '</s>');
+}
+
+/** Helper functions. **/
+
+/**
+ * Splits a string with a delimiter and
+ * creates an array from it.
+ *
+ * @param delimiter	The delimiter character.
+ **/
+String.prototype.splitToArray = function(delimiter) {
+  return this.split(delimiter).map(item => item.trim());
 }
