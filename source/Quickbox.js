@@ -26,13 +26,33 @@ Scene.prototype.theme = function theme(theme) {
   self.changeBackgroundColor(theme);
 }
 
-Scene.validCommands["theme"] = 1;
-Scene.validCommands["animate"] = 1;
+/**
+ * Increases font size.
+ *
+ * FIXME: This is just really awkward to control, but it's ChoiceScript's convention.
+ **/
+Scene.prototype.bigger_text = function bigger_text() {
+  self.changeFontSize(true);
+}
+
+/**
+ * Reduces font size.
+ *
+ * FIXME: Ditto with bigger_text.
+ **/
+Scene.prototype.smaller_text = function smaller_text() {
+  self.changeFontSize(false);
+}
+ 
+Scene.validCommands.theme = 1;
+Scene.validCommands.animate = 1;
+Scene.validCommands.bigger_text = 1;
+Scene.validCommands.smaller_text = 1;
 
 /** OVERRIDES FOR STANDARD CHOICESCRIPT FUNCTIONS **/
 
 /** 
- * Override replaceBbCode to allow for a working u] and [s] tag.
+ * Override replaceBbCode to allow for a working [u] and [s] tag.
  *
  * @see ui#replaceBbCode
  **/
