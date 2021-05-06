@@ -90,8 +90,34 @@ Scene.prototype.show_buttons = function show_buttons(arg) {
   }
 }
 
+/**
+ * Displays a button that redirects the player to a specific scene.
+ *
+ * @params arg[0]	The text to display on the button.
+ * @params arg[1]	The scene to redirect the user to.
+ **/
+Scene.prototype.scene_button = function scene_button(arg) {
+  if (typeof window == "undefined") return;
+  
+  var args = arg.splitToArray(",");
+  var self = this;
+  
+  if (args.length != 2) return;
+  
+  this.paragraph();
+  var target = this.target;
+  if (!target) target = document.getElementById('text');
+  printButton(args[0], target, false, function() {
+      self.resetPage();
+      self.goto_scene(args[1]);
+  });
+  
+  this.prevLine = "empty";
+  this.screenEmpty = false;
+}
+
 // Add our list of commands to the Scene itself.
-var commands = [ "theme", "animate", "bigger_text", "smaller_text", "hide_buttons", "show_buttons" ];
+var commands = [ "theme", "animate", "bigger_text", "smaller_text", "hide_buttons", "show_buttons", "scene_button" ];
 for (i = 0; i < commands.length; i++) {
   Scene.validCommands[commands[i]] = 1;
 }
