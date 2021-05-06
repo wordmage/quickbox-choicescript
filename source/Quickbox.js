@@ -3,7 +3,7 @@
  * This setter acts like the settings page, therefore
  * it is best to test compatibility through the settings page itself.
  *
- * @params  shouldAnimate	Should we animate?
+ * @param  shouldAnimate	Should we animate?
  **/
 Scene.prototype.animate = function animate(shouldAnimate) {
   self.window.animateEnabled = (shouldAnimate.toLowerCase() == 'true');
@@ -12,7 +12,7 @@ Scene.prototype.animate = function animate(shouldAnimate) {
 /**
  * Changes the theme of the page.
  *
- * @params theme	The theme to set. This argument is passed to
+ * @param theme	The theme to set. This argument is passed to
  *			changeBackgroundColor. Valid options are
  *			"sepia", "white" (same as sepia), "black"
  *
@@ -55,7 +55,7 @@ Scene.prototype.smaller_text = function smaller_text() {
  * in situations wherein the user can't progress
  * the game.
  *
- * @params args		Buttons to show, this can be any of
+ * @param args		Buttons to show, this can be any of
  *			"settings", "menu", and "stats", or
  *			all of them.
  **/
@@ -74,7 +74,7 @@ Scene.prototype.hide_buttons = function hide_buttons(arg) {
 /**
  * Pops back buttons to visibility.
  *
- * @params args		Buttons to show, this can be any of
+ * @param args		Buttons to show, this can be any of
  *			"settings", "menu", and "stats", or
  *			all of them.
  **/
@@ -93,8 +93,10 @@ Scene.prototype.show_buttons = function show_buttons(arg) {
 /**
  * Displays a button that redirects the player to a specific scene.
  *
- * @params arg[0]	The text to display on the button.
- * @params arg[1]	The scene to redirect the user to.
+ * This function is a syntactic sugar for in_paragraph_button("scene", arg).
+ *
+ * @param arg[0]	The text to display on the button.
+ * @param arg[1]	The scene to redirect the user to.
  **/
 Scene.prototype.scene_button = function scene_button(arg) {
   this.in_paragraph_button("scene", arg);
@@ -103,13 +105,25 @@ Scene.prototype.scene_button = function scene_button(arg) {
 /**
  * Displays a button that redirects the player to a specific label.
  *
- * @params arg[0]	The text to display on the button.
- * @params arg[1]	The scene to redirect the user to.
+ * This function is a syntactic sugar for in_paragraph_button("goto", arg).
+ *
+ * @param arg[0]	The text to display on the button.
+ * @param arg[1]	The scene to redirect the user to.
  **/
 Scene.prototype.goto_button = function goto_button(arg) {
   this.in_paragraph_button("goto", arg);
 }
 
+/**
+ * Displays a non-interruptive button.
+ * At the moment, this function is limited to displaying a button
+ * that can redirect the player.
+ *
+ * @param type		"scene" for scene redirection, and "goto" for
+ *			a button that redirects player to a label.
+ * @param arg[0]	The text to display on the button.
+ * @param arg[1]	The scene to redirect the user to.
+ **/
 Scene.prototype.in_paragraph_button = function in_paragraph_button(type, arg) {
   if (typeof window == "undefined") return;
   
@@ -164,6 +178,8 @@ replaceBbCode = function(msg) {
  * creates an array from it.
  *
  * @param delimiter	The delimiter character.
+ *
+ * @return An array containing delimited elements.
  **/
 String.prototype.splitToArray = function(delimiter) {
   return this.split(delimiter).map(item => item.trim().toLowerCase());
