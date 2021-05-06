@@ -6,12 +6,7 @@
  * @params  shouldAnimate	Should we animate?
  **/
 Scene.prototype.animate = function animate(shouldAnimate) {
-  //FIXME: I don't know why we can't just use booleans like booleans.
-  if (shouldAnimate == "true") {
-    self.window.animateEnabled = true;
-  } else if (shouldAnimate == "false") {
-    self.window.animateEnabled = false;
-  }
+  self.window.animateEnabled = (shouldAnimate.toLowerCase() == 'true');
 }
 
 /**
