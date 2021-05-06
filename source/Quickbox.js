@@ -97,26 +97,45 @@ Scene.prototype.show_buttons = function show_buttons(arg) {
  * @params arg[1]	The scene to redirect the user to.
  **/
 Scene.prototype.scene_button = function scene_button(arg) {
+  this.in_paragraph_button("scene", arg);
+}
+ 
+/**
+ * Displays a button that redirects the player to a specific label.
+ *
+ * @params arg[0]	The text to display on the button.
+ * @params arg[1]	The scene to redirect the user to.
+ **/
+Scene.prototype.goto_button = function goto_button(arg) {
+  this.in_paragraph_button("goto", arg);
+}
+
+Scene.prototype.in_paragraph_button = function in_paragraph_button(type, arg) {
   if (typeof window == "undefined") return;
   
   var title = arg.substring(0, arg.lastIndexOf(" ") + 1);
-  var scene = arg.substring(arg.lastIndexOf(" ") + 1, arg.length);
+  var dest = arg.substring(arg.lastIndexOf(" ") + 1, arg.length);
   var self = this;
   
   this.paragraph();
   var target = this.target;
   if (!target) target = document.getElementById('text');
   printButton(title, target, false, function() {
+    if (type == "scene") {
       self.resetPage();
-      self.goto_scene(scene);
+      self.goto_scene(dest);
+      this.prevLine = "empty";
+      this.screenEmpty = false;
+    } else if (type == "goto") {
+      self["goto"](dest);
+      self.finished = false;
+      self.resetPage();
+    }
   });
-  
-  this.prevLine = "empty";
-  this.screenEmpty = false;
 }
 
 // Add our list of commands to the Scene itself.
-var commands = [ "theme", "animate", "bigger_text", "smaller_text", "hide_buttons", "show_buttons", "scene_button" ];
+var commands = [ "theme", "animate", "bigger_text", "smaller_text", "hide_buttons", "show_buttons", "scene_button", "goto_button", "gosub_button", "in_paragraph_button" ];
 for (i = 0; i < commands.length; i++) {
   Scene.validCommands[commands[i]] = 1;
 }
