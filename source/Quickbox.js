@@ -19,7 +19,13 @@ Scene.prototype.animate = function animate(shouldAnimate) {
  * @see [ui#changeBackgroundColor]
  **/
 Scene.prototype.theme = function theme(theme) {
-  self.changeBackgroundColor(theme);
+  var _theme = theme.toLowerCase();
+  
+  if (_theme != "sepia" && _theme != "white" && _theme != "black") {
+    self.changeBackgroundColor("white");
+  } else {
+    self.changeBackgroundColor(_theme);
+  }
 }
 
 /**
@@ -116,5 +122,5 @@ replaceBbCode = function(msg) {
  * @param delimiter	The delimiter character.
  **/
 String.prototype.splitToArray = function(delimiter) {
-  return this.split(delimiter).map(item => item.trim());
+  return this.split(delimiter).map(item => item.trim().toLowerCase());
 }
