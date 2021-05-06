@@ -60,7 +60,7 @@ Scene.prototype.smaller_text = function smaller_text() {
  *			all of them.
  **/
 Scene.prototype.hide_buttons = function hide_buttons(arg) {
-  var args = arg.splitToArray(",");
+  var args = arg.splitToArray(" ");
   
   if (args.includes("menu") || args.includes("settings")) {
     self.document.getElementById("menuButton").style.display = "none";
@@ -79,7 +79,7 @@ Scene.prototype.hide_buttons = function hide_buttons(arg) {
  *			all of them.
  **/
 Scene.prototype.show_buttons = function show_buttons(arg) {
-  var args = arg.splitToArray(",");
+  var args = arg.splitToArray(" ");
  
   if (args.includes("menu") || args.includes("settings")) {
     self.document.getElementById("menuButton").style.display = "block";
@@ -99,17 +99,16 @@ Scene.prototype.show_buttons = function show_buttons(arg) {
 Scene.prototype.scene_button = function scene_button(arg) {
   if (typeof window == "undefined") return;
   
-  var args = arg.splitToArray(",");
+  var title = arg.substring(0, arg.lastIndexOf(" ") + 1);
+  var scene = arg.substring(arg.lastIndexOf(" ") + 1, arg.length);
   var self = this;
-  
-  if (args.length != 2) return;
   
   this.paragraph();
   var target = this.target;
   if (!target) target = document.getElementById('text');
-  printButton(args[0], target, false, function() {
+  printButton(title, target, false, function() {
       self.resetPage();
-      self.goto_scene(args[1]);
+      self.goto_scene(scene);
   });
   
   this.prevLine = "empty";
